@@ -3,14 +3,14 @@ import 'package:flutter_theme_color_check/widget/tab_color.dart';
 import 'package:flutter_theme_color_check/widget/tab_component.dart';
 import 'package:flutter_theme_color_check/widget/tab_pick.dart';
 
-class ScTab extends StatefulWidget {
-  const ScTab({super.key});
+class ScMain extends StatefulWidget {
+  const ScMain({super.key});
 
   @override
-  ScTabState createState() => ScTabState();
+  ScMainState createState() => ScMainState();
 }
 
-class ScTabState extends State<ScTab> with TickerProviderStateMixin {
+class ScMainState extends State<ScMain> with TickerProviderStateMixin {
   late final TabController _tabController;
 
   @override
@@ -31,8 +31,6 @@ class ScTabState extends State<ScTab> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     int currentPageIndex = 0;
-
-    debugPrint("index = ${_tabController.index}");
 
     return Scaffold(
       appBar: AppBar(

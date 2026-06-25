@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_theme_color_check/widget/w_radio.dart';
 import 'package:flutter_theme_color_check/widget/w_segment.dart';
 
-class Switchs extends StatelessWidget {
-  const Switchs({super.key});
+class GSwitchs extends StatelessWidget {
+  const GSwitchs({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class Switchs extends StatelessWidget {
             spacing: 8,
             children: [
               // Segment
-              Segment(),
+              WSegment(),
 
               // Radio
               Container(

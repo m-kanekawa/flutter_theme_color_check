@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Buttons extends StatelessWidget {
-  const Buttons({super.key});
+class GButtons extends StatelessWidget {
+  const GButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,10 @@ class Buttons extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              FloatingActionButton.small(
+                onPressed: () {},
+                child: const Icon(Icons.add),
               ),
             ],
           ),

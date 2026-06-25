@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_theme_color_check/widget/sc_tab.dart';
+import 'package:flutter_theme_color_check/widget/sc_main.dart';
 import 'package:flutter_theme_color_check/notifier/theme_mode_notifier.dart';
 import 'package:flutter_theme_color_check/notifier/color_notifier.dart';
 
@@ -28,7 +28,7 @@ class MainApp extends HookConsumerWidget {
     }, []);
 
     return MaterialApp(
-      home: ScTab(),
+      home: ScMain(),
       theme: colN.themeL,
       darkTheme: colN.themeD,
       themeMode: (theme == Brightness.light) ? ThemeMode.light : ThemeMode.dark,
