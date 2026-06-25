@@ -26,6 +26,12 @@ class GTexts extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // Chip
+              Chip(
+                avatar: CircleAvatar(child: const Text('a')),
+                label: const Text('Chip'),
+              ),
             ],
           ),
         ),
