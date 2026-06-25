@@ -14,3 +14,4 @@ pickup color and check how it looks in widgets.
 
 4. Goto "Component" tab
 ![img4](doc/img4.png)  
+![img5](doc/img5.png)  
