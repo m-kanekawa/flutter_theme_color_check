@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_theme_color_check/widget/w_alert.dart';
 import 'package:flutter_theme_color_check/widget/w_card.dart';
+import 'package:flutter_theme_color_check/widget/w_timepicker.dart';
 
 class GBox extends StatelessWidget {
   const GBox({super.key});
@@ -18,13 +19,8 @@ class GBox extends StatelessWidget {
             spacing: 8,
             children: [
               WAlert(),
-              const Divider(
-                height: 20,
-                thickness: 5,
-                indent: 20,
-                endIndent: 0,
-                // color: Colors.black,
-              ),
+              WTimePicker(),
+              const Divider(height: 20, thickness: 5, indent: 20, endIndent: 0),
               WCard(),
             ],
           ),
