@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void MkPrint(String s) {
   if (kDebugMode) debugPrint(s);
-  // iOS release確認の時は kDebugMode をはずす
 }
 
 mixin MkPreference {
