@@ -24,4 +24,4 @@ Pickup colors, check how they look in widgets, and get code.
 * Add some more components
 * Add more Color elements in ColorScheme
   
-**Pull requests are very welcome!!!**  
+**Pull requests are very welcome ^^**  
