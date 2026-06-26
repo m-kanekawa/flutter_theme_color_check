@@ -13,19 +13,25 @@ class TabCode extends HookConsumerWidget {
 
     final String code =
         '''
-static final Color COLOR_SEED                = Color(${col.get_value('COLOR_SEED')});
-static final Color COLOR_PRIMARY             = Color(${col.get_value('COLOR_PRIMARY')});
-static final Color COLOR_SECONDARY           = Color(${col.get_value('COLOR_SECONDARY')});
-static final Color COLOR_TERTIARY            = Color(${col.get_value('COLOR_TERTIARY')});
+static final Color COLOR_SEED_L              = Color(${col.get_value('COLOR_SEED_L')});
+static final Color COLOR_PRIMARY_L           = Color(${col.get_value('COLOR_PRIMARY_L')});
+static final Color COLOR_SECONDARY_L         = Color(${col.get_value('COLOR_SECONDARY_L')});
+static final Color COLOR_TERTIARY_L          = Color(${col.get_value('COLOR_TERTIARY_L')});
 static final Color COLOR_SURFACE_L           = Color(${col.get_value('COLOR_SURFACE_L')});
-static final Color COLOR_SURFACE_D           = Color(${col.get_value('COLOR_SURFACE_D')});
 static final Color COLOR_SURFACE_BRIGHT_L    = Color(${col.get_value('COLOR_SURFACE_BRIGHT_L')});
-static final Color COLOR_SURFACE_BRIGHT_D    = Color(${col.get_value('COLOR_SURFACE_BRIGHT_D')});
 static final Color COLOR_ONSURFACE_L         = Color(${col.get_value('COLOR_ONSURFACE_L')});
-static final Color COLOR_ONSURFACE_D         = Color(${col.get_value('COLOR_ONSURFACE_D')});
 static final Color COLOR_PRIMARY_CONTAINER_L = Color(${col.get_value('COLOR_PRIMARY_CONTAINER_L')});
+static final Color COLOR_ERROR_L             = Color(${col.get_value('COLOR_ERROR_L')});
+
+static final Color COLOR_SEED_D              = Color(${col.get_value('COLOR_SEED_D')});
+static final Color COLOR_PRIMARY_D           = Color(${col.get_value('COLOR_PRIMARY_D')});
+static final Color COLOR_SECONDARY_D         = Color(${col.get_value('COLOR_SECONDARY_D')});
+static final Color COLOR_TERTIARY_D          = Color(${col.get_value('COLOR_TERTIARY_D')});
+static final Color COLOR_SURFACE_D           = Color(${col.get_value('COLOR_SURFACE_D')});
+static final Color COLOR_SURFACE_BRIGHT_D    = Color(${col.get_value('COLOR_SURFACE_BRIGHT_D')});
+static final Color COLOR_ONSURFACE_D         = Color(${col.get_value('COLOR_ONSURFACE_D')});
 static final Color COLOR_PRIMARY_CONTAINER_D = Color(${col.get_value('COLOR_PRIMARY_CONTAINER_D')});
-static final Color COLOR_ERROR               = Color(${col.get_value('COLOR_ERROR')});
+static final Color COLOR_ERROR_D             = Color(${col.get_value('COLOR_ERROR_D')});
 
 // -- theme(Light) --
 final themeL = ThemeData(
@@ -36,18 +42,18 @@ final themeL = ThemeData(
 );
 
 final colorSchemeL = ColorScheme.fromSeed(
-  seedColor         : COLOR_SEED,
+  seedColor         : COLOR_SEED_L,
   brightness        : Brightness.light,
 )
 .copyWith( 
-  primary           : COLOR_PRIMARY,
-  secondary         : COLOR_SECONDARY,
-  tertiary          : COLOR_TERTIARY,
+  primary           : COLOR_PRIMARY_L,
+  secondary         : COLOR_SECONDARY_L,
+  tertiary          : COLOR_TERTIARY_L,
   primaryContainer  : COLOR_PRIMARY_CONTAINER_L,
   surface           : COLOR_SURFACE_L,
   surfaceBright     : COLOR_SURFACE_BRIGHT_L,
   onSurface         : COLOR_ONSURFACE_L,
-  error             : COLOR_ERROR,
+  error             : COLOR_ERROR_L,
 );
 
 // -- theme(Dark) --
@@ -58,19 +64,19 @@ final themeD = ThemeData(
   textButtonTheme   : textButtonThemeD,
 );
 final colorSchemeD = ColorScheme.fromSeed(
-  seedColor         : COLOR_SEED,
+  seedColor         : COLOR_SEED_D,
   brightness        : Brightness.dark,
 )
 .copyWith( 
-  primary           : COLOR_PRIMARY,
-  secondary         : COLOR_SECONDARY,
-  tertiary          : COLOR_TERTIARY,
+  primary           : COLOR_PRIMARY_D,
+  secondary         : COLOR_SECONDARY_D,
+  tertiary          : COLOR_TERTIARY_D,
   primaryContainer  : COLOR_PRIMARY_CONTAINER_D,
   onPrimary         : COLOR_ONSURFACE_D,
   surface           : COLOR_SURFACE_D,
   surfaceBright     : COLOR_SURFACE_BRIGHT_D,
   onSurface         : COLOR_ONSURFACE_D,
-  error             : COLOR_ERROR,
+  error             : COLOR_ERROR_D,
 );
 ''';
 

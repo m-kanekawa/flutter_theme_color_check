@@ -1,6 +1,6 @@
 # flutter_theme_color_check
 
-Pickup colors, check how they look in widgets, and get code.
+Pickup colors, check how they look, and get code.
 
 ## How to use
 1. This app starts with "Pick" tab.  
@@ -19,6 +19,10 @@ Pickup colors, check how they look in widgets, and get code.
 5. Goto "Code" tab and copy the code.  
 ![img6](doc/img6.png)  
 
+
+## Run
+Required H930 x W900 screen size, so
+recommended to run on the desktop.
 
 ## Things I'd like to add
 * Add some more components

@@ -9,40 +9,117 @@ class TabPick extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final col = ref.watch(colorProvider);
-    final colN = ref.read(colorProvider.notifier);
 
-    List<Widget> w = [];
-    for (var key in col.list) {
-      Color color = colN.get_color(key);
-
-      w.add(
-        Row(
+    return Material(
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Column(
           spacing: 8,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(key),
-                  Text('${ColorTools.materialNameAndCode(color)} '),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 8,
+              children: [
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text('Light Mode'),
+                  ),
+                ),
+                Container(
+                  width: 40,
+                  alignment: Alignment.center,
+                  child: Text('Same'),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text('Dark Mode'),
+                  ),
+                ),
+              ],
             ),
-            ColorBox(name: key, color: color),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 8,
+              children: [
+                Expanded(child: A(list: col.listL)),
+                B(list: col.listSame),
+                Expanded(
+                  child: A(list: col.listD, listS: col.listSame),
+                ),
+              ],
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class B extends HookConsumerWidget {
+  final Map<String, bool> list;
+  const B({super.key, required this.list});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final colN = ref.read(colorProvider.notifier);
+    List<Widget> w = [];
+
+    for (var key in list.keys) {
+      w.add(
+        Checkbox(
+          value: list[key],
+          onChanged: (val) {
+            colN.set_same(key, val!);
+          },
         ),
       );
     }
+    return Container(
+      padding: EdgeInsets.all(8),
+      child: Column(spacing: 8, children: w),
+    );
+  }
+}
 
-    return Material(
-      child: Center(
-        child: Container(
-          width: 300,
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(border: Border.all()),
-          child: Column(spacing: 8, children: w),
-        ),
-      ),
+class A extends HookConsumerWidget {
+  final List<String> list;
+  final Map<String, bool>? listS;
+  const A({super.key, required this.list, this.listS});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final colN = ref.read(colorProvider.notifier);
+    List<Widget> w = [];
+
+    for (var key in list) {
+      Color color = colN.get_color(key);
+      w.add(
+        ((listS == null) || ((listS != null) && listS![key] == false))
+            ? Row(
+                spacing: 8,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(key),
+                        Text('${ColorTools.materialNameAndCode(color)} '),
+                      ],
+                    ),
+                  ),
+                  ColorBox(name: key, color: color),
+                ],
+              )
+            : SizedBox(height: 40),
+      );
+    }
+    return Container(
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(border: Border.all()),
+      child: Column(spacing: 8, children: w),
     );
   }
 }

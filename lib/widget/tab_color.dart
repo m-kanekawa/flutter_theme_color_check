@@ -38,6 +38,7 @@ class TabColor extends HookConsumerWidget {
 
     return Expanded(
       child: Container(
+        padding: EdgeInsets.all(8),
         color: scheme.surface,
         child: Column(
           children: [
