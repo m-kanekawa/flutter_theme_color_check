@@ -14,9 +14,11 @@ Pickup colors, check how they look, and get code.
 
 4. Goto "Component" tab and check how widgets look.  
 ![img4](doc/img4.png)  
+
+5. Don't to forget to swich to dartk mode.  
 ![img5](doc/img5.png)  
 
-5. Goto "Code" tab and copy the code.  
+6. Goto "Code" tab and copy the code.  
 ![img6](doc/img6.png)  
 
 
