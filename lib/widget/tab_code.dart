@@ -34,14 +34,12 @@ static final Color? COLOR_PRIMARY_CONTAINER_D = ${col.get_color_code('COLOR_PRIM
 static final Color? COLOR_ERROR_D             = ${col.get_color_code('COLOR_ERROR_D')};
 
 // -- theme(Light) --
-final themeL = ThemeData(
+static final themeL = ThemeData(
   useMaterial3      : true,
   colorScheme       : colorSchemeL,
-  appBarTheme       : appBarThemeL,
-  textButtonTheme   : textButtonThemeL,
 );
 
-final colorSchemeL = ColorScheme.fromSeed(
+static final colorSchemeL = ColorScheme.fromSeed(
   seedColor         : COLOR_SEED_L,
   brightness        : Brightness.light,
 )
@@ -57,13 +55,11 @@ final colorSchemeL = ColorScheme.fromSeed(
 );
 
 // -- theme(Dark) --
-final themeD = ThemeData(
+static final themeD = ThemeData(
   useMaterial3      : true,
   colorScheme       : colorSchemeD,
-  appBarTheme       : appBarThemeD,
-  textButtonTheme   : textButtonThemeD,
 );
-final colorSchemeD = ColorScheme.fromSeed(
+static final colorSchemeD = ColorScheme.fromSeed(
   seedColor         : COLOR_SEED_D,
   brightness        : Brightness.dark,
 )
