@@ -21,6 +21,11 @@ class TabPick extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 8,
               children: [
+                Container(
+                  width: 40,
+                  alignment: Alignment.center,
+                  child: Text('Use'),
+                ),
                 Expanded(
                   child: Container(
                     alignment: Alignment.center,
@@ -30,7 +35,7 @@ class TabPick extends HookConsumerWidget {
                 Container(
                   width: 40,
                   alignment: Alignment.center,
-                  child: Text('Same'),
+                  child: Text('Use'),
                 ),
                 Expanded(
                   child: Container(
@@ -44,10 +49,13 @@ class TabPick extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 8,
               children: [
-                Expanded(child: A(list: col.listL)),
-                B(list: col.listSame),
+                Check(list: col.list_use, end: 'L'),
                 Expanded(
-                  child: A(list: col.listD, listS: col.listSame),
+                  child: ColorLine(list: col.list_use, end: 'L'),
+                ),
+                Check(list: col.list_use, end: 'D'),
+                Expanded(
+                  child: ColorLine(list: col.list_use, end: 'D'),
                 ),
               ],
             ),
@@ -58,22 +66,26 @@ class TabPick extends HookConsumerWidget {
   }
 }
 
-class B extends HookConsumerWidget {
-  final Map<String, bool> list;
-  const B({super.key, required this.list});
+class Check extends HookConsumerWidget {
+  final Map<String, dynamic> list;
+  final String end;
+  const Check({super.key, required this.list, required this.end});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colN = ref.read(colorProvider.notifier);
     List<Widget> w = [];
 
-    for (var key in list.keys) {
+    for (var key_u in list.keys) {
+      if (!key_u.endsWith(end)) continue;
       w.add(
         Checkbox(
-          value: list[key],
-          onChanged: (val) {
-            colN.set_same(key, val!);
-          },
+          value: list[key_u],
+          onChanged: (key_u.startsWith('U_COLOR_SEED_'))
+              ? null
+              : (val) {
+                  colN.set_use(key_u, val!);
+                },
         ),
       );
     }
@@ -84,36 +96,39 @@ class B extends HookConsumerWidget {
   }
 }
 
-class A extends HookConsumerWidget {
-  final List<String> list;
-  final Map<String, bool>? listS;
-  const A({super.key, required this.list, this.listS});
+class ColorLine extends HookConsumerWidget {
+  final Map<String, dynamic> list;
+  final String end;
+  const ColorLine({super.key, required this.list, required this.end});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colN = ref.read(colorProvider.notifier);
     List<Widget> w = [];
 
-    for (var key in list) {
-      Color color = colN.get_color(key);
+    for (var key_u in list.keys) {
+      if (!key_u.endsWith(end)) continue;
+      String key = key_u.replaceAll('U_', '');
+      Color? color = colN.get_color(key);
       w.add(
-        ((listS == null) || ((listS != null) && listS![key] == false))
-            ? Row(
-                spacing: 8,
+        Row(
+          spacing: 8,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(key),
-                        Text('${ColorTools.materialNameAndCode(color)} '),
-                      ],
-                    ),
-                  ),
-                  ColorBox(name: key, color: color),
+                  Text(key),
+                  if (list[key_u] == true)
+                    Text(ColorTools.materialNameAndCode(color)),
                 ],
-              )
-            : SizedBox(height: 40),
+              ),
+            ),
+            (list[key_u] == true)
+                ? ColorBox(name: key, color: color)
+                : SizedBox(height: 40),
+          ],
+        ),
       );
     }
     return Container(

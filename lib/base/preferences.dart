@@ -25,6 +25,7 @@ mixin MkPreference {
         list[key] = p.getString(key) ?? list[key];
       }
       MkPrint('readSetting($key) = ${list[key]}');
+      await saveSetting(key, p: p);
     }
   }
 
@@ -32,77 +33,51 @@ mixin MkPreference {
     list[key] = val;
   }
 
-  Future _saveBool(SharedPreferences p, String key) async {
+  Future _saveBool(String key, {SharedPreferences? p}) async {
+    p ??= await SharedPreferences.getInstance();
     bool val = list[key];
-
-    if (val) {
-      await p.setBool(key, true);
-      MkPrint('saveSettingB($key) = true');
-    } else {
-      await p.remove(key);
-      MkPrint('removeSettingB($key)');
-    }
+    await p.setBool(key, val);
+    MkPrint('saveSettingB($key) = $val');
   }
 
-  Future _saveInt(SharedPreferences p, String key) async {
+  Future _saveInt(String key, {SharedPreferences? p}) async {
+    p ??= await SharedPreferences.getInstance();
     int val = list[key];
-
-    if (val > 0) {
-      await p.setInt(key, val);
-      MkPrint('saveSettingI($key) = $val');
-    } else {
-      await p.remove(key);
-      MkPrint('removeSettingI($key)');
-    }
+    await p.setInt(key, val);
+    MkPrint('saveSettingI($key) = $val');
   }
 
-  Future _saveDouble(SharedPreferences p, String key) async {
+  Future _saveDouble(String key, {SharedPreferences? p}) async {
+    p ??= await SharedPreferences.getInstance();
     double val = list[key];
-
-    if (val > 0) {
-      await p.setDouble(key, val);
-      MkPrint('saveSettingD($key) = ${val.toStringAsFixed(2)}');
-    } else {
-      await p.remove(key);
-      MkPrint('removeSettingD($key)');
-    }
+    await p.setDouble(key, val);
+    MkPrint('saveSettingD($key) = ${val.toStringAsFixed(2)}');
   }
 
-  Future _saveString(SharedPreferences p, String key) async {
+  Future _saveString(String key, {SharedPreferences? p}) async {
+    p ??= await SharedPreferences.getInstance();
     String val = list[key];
-
-    if (val.isNotEmpty) {
-      await p.setString(key, val);
-      MkPrint('saveSettingS($key) = $val');
-    } else {
-      await p.remove(key);
-      MkPrint('removeSettingS($key)');
-    }
+    await p.setString(key, val);
+    MkPrint('saveSettingS($key) = $val');
   }
 
-  Future saveSetting(String key) async {
-    SharedPreferences p = await SharedPreferences.getInstance();
+  Future saveSetting(String key, {SharedPreferences? p}) async {
+    p ??= await SharedPreferences.getInstance();
     if (list[key] is int) {
-      await _saveInt(p, key);
+      await _saveInt(key, p: p);
     } else if (list[key] is bool) {
-      await _saveBool(p, key);
+      await _saveBool(key, p: p);
     } else if (list[key] is double) {
-      await _saveDouble(p, key);
+      await _saveDouble(key, p: p);
     } else if (list[key] is String) {
-      await _saveString(p, key);
+      await _saveString(key, p: p);
     }
   }
 
-  Future saveAllSetting() async {
-    SharedPreferences p = await SharedPreferences.getInstance();
+  Future saveAllSetting({SharedPreferences? p}) async {
+    p ??= await SharedPreferences.getInstance();
     for (var key in list.keys) {
-      if (list[key] is int) {
-        await _saveInt(p, key);
-      } else if (list[key] is bool) {
-        await _saveBool(p, key);
-      } else if (list[key] is double) {
-        await _saveDouble(p, key);
-      }
+      saveSetting(key, p: p);
     }
   }
 
@@ -111,8 +86,8 @@ mixin MkPreference {
     await saveSetting(key);
   }
 
-  Future removeAllSetting() async {
-    SharedPreferences p = await SharedPreferences.getInstance();
+  Future removeAllSetting({SharedPreferences? p}) async {
+    p ??= await SharedPreferences.getInstance();
     for (var key in list.keys) {
       MkPrint('remove($key)');
       await p.remove(key);

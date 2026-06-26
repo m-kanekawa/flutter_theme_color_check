@@ -13,25 +13,25 @@ class TabCode extends HookConsumerWidget {
 
     final String code =
         '''
-static final Color COLOR_SEED_L              = Color(${col.get_value('COLOR_SEED_L')});
-static final Color COLOR_PRIMARY_L           = Color(${col.get_value('COLOR_PRIMARY_L')});
-static final Color COLOR_SECONDARY_L         = Color(${col.get_value('COLOR_SECONDARY_L')});
-static final Color COLOR_TERTIARY_L          = Color(${col.get_value('COLOR_TERTIARY_L')});
-static final Color COLOR_SURFACE_L           = Color(${col.get_value('COLOR_SURFACE_L')});
-static final Color COLOR_SURFACE_BRIGHT_L    = Color(${col.get_value('COLOR_SURFACE_BRIGHT_L')});
-static final Color COLOR_ONSURFACE_L         = Color(${col.get_value('COLOR_ONSURFACE_L')});
-static final Color COLOR_PRIMARY_CONTAINER_L = Color(${col.get_value('COLOR_PRIMARY_CONTAINER_L')});
-static final Color COLOR_ERROR_L             = Color(${col.get_value('COLOR_ERROR_L')});
+static final Color  COLOR_SEED_L              = ${col.get_color_code('COLOR_SEED_L')};
+static final Color? COLOR_PRIMARY_L           = ${col.get_color_code('COLOR_PRIMARY_L')};
+static final Color? COLOR_SECONDARY_L         = ${col.get_color_code('COLOR_SECONDARY_L')};
+static final Color? COLOR_TERTIARY_L          = ${col.get_color_code('COLOR_TERTIARY_L')};
+static final Color? COLOR_SURFACE_L           = ${col.get_color_code('COLOR_SURFACE_L')};
+static final Color? COLOR_SURFACE_BRIGHT_L    = ${col.get_color_code('COLOR_SURFACE_BRIGHT_L')};
+static final Color? COLOR_ONSURFACE_L         = ${col.get_color_code('COLOR_ONSURFACE_L')};
+static final Color? COLOR_PRIMARY_CONTAINER_L = ${col.get_color_code('COLOR_PRIMARY_CONTAINER_L')};
+static final Color? COLOR_ERROR_L             = ${col.get_color_code('COLOR_ERROR_L')};
 
-static final Color COLOR_SEED_D              = Color(${col.get_value('COLOR_SEED_D')});
-static final Color COLOR_PRIMARY_D           = Color(${col.get_value('COLOR_PRIMARY_D')});
-static final Color COLOR_SECONDARY_D         = Color(${col.get_value('COLOR_SECONDARY_D')});
-static final Color COLOR_TERTIARY_D          = Color(${col.get_value('COLOR_TERTIARY_D')});
-static final Color COLOR_SURFACE_D           = Color(${col.get_value('COLOR_SURFACE_D')});
-static final Color COLOR_SURFACE_BRIGHT_D    = Color(${col.get_value('COLOR_SURFACE_BRIGHT_D')});
-static final Color COLOR_ONSURFACE_D         = Color(${col.get_value('COLOR_ONSURFACE_D')});
-static final Color COLOR_PRIMARY_CONTAINER_D = Color(${col.get_value('COLOR_PRIMARY_CONTAINER_D')});
-static final Color COLOR_ERROR_D             = Color(${col.get_value('COLOR_ERROR_D')});
+static final Color  COLOR_SEED_D              = ${col.get_color_code('COLOR_SEED_D')};
+static final Color? COLOR_PRIMARY_D           = ${col.get_color_code('COLOR_PRIMARY_D')};
+static final Color? COLOR_SECONDARY_D         = ${col.get_color_code('COLOR_SECONDARY_D')};
+static final Color? COLOR_TERTIARY_D          = ${col.get_color_code('COLOR_TERTIARY_D')};
+static final Color? COLOR_SURFACE_D           = ${col.get_color_code('COLOR_SURFACE_D')};
+static final Color? COLOR_SURFACE_BRIGHT_D    = ${col.get_color_code('COLOR_SURFACE_BRIGHT_D')};
+static final Color? COLOR_ONSURFACE_D         = ${col.get_color_code('COLOR_ONSURFACE_D')};
+static final Color? COLOR_PRIMARY_CONTAINER_D = ${col.get_color_code('COLOR_PRIMARY_CONTAINER_D')};
+static final Color? COLOR_ERROR_D             = ${col.get_color_code('COLOR_ERROR_D')};
 
 // -- theme(Light) --
 final themeL = ThemeData(
