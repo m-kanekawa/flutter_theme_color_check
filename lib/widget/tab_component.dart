@@ -11,7 +11,8 @@ class TabComponent extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Material(
-      child: SafeArea(
+      child: Container(
+        padding: EdgeInsets.all(8),
         child: Wrap(
           spacing: 8,
           children: [GButtons(), GSwitchs(), GTexts(), GBox()],

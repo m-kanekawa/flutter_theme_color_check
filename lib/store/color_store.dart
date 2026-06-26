@@ -36,7 +36,7 @@ class ColorStore with MkPreference {
   }
 
   // --- member ---
-  String get_color(String key) {
+  String get_value(String key) {
     return list[key];
   }
 

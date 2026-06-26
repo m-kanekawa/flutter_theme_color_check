@@ -14,8 +14,12 @@ class ColorNotifier with ChangeNotifier {
   // --- public ---
   Iterable<String> get list => _settting.list.keys;
 
+  String get_value(String key) {
+    return _settting.get_value(key);
+  }
+
   Color get_color(String key) {
-    return Color(int.parse(_settting.get_color(key)));
+    return Color(int.parse(_settting.get_value(key)));
   }
 
   Future set_color(String key, Color val) async {

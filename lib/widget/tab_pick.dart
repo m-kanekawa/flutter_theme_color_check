@@ -28,26 +28,29 @@ class TabPick extends HookConsumerWidget {
                 ],
               ),
             ),
-            A(name: key, color: color),
+            ColorBox(name: key, color: color),
           ],
         ),
       );
     }
 
     return Material(
-      child: SafeArea(
-        child: Center(
-          child: SizedBox(width: 300, child: Column(spacing: 8, children: w)),
+      child: Center(
+        child: Container(
+          width: 300,
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(border: Border.all()),
+          child: Column(spacing: 8, children: w),
         ),
       ),
     );
   }
 }
 
-class A extends HookConsumerWidget {
+class ColorBox extends HookConsumerWidget {
   final String name;
   final Color color;
-  const A({super.key, required this.name, required this.color});
+  const ColorBox({super.key, required this.name, required this.color});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

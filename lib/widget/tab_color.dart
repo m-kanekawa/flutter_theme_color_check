@@ -21,13 +21,11 @@ class TabColor extends HookConsumerWidget {
     final colorEntriesD = colorsD.entries.toList();
 
     return Material(
-      child: SafeArea(
-        child: Row(
-          children: [
-            _renderScheme(colorEntriesL, schemeL),
-            _renderScheme(colorEntriesD, schemeD),
-          ],
-        ),
+      child: Row(
+        children: [
+          _renderScheme(colorEntriesL, schemeL),
+          _renderScheme(colorEntriesD, schemeD),
+        ],
       ),
     );
   }

@@ -3,15 +3,18 @@
 pickup color and check how it looks in widgets.
 
 ## How to use
-1. Goto "Pick" tab
+1. This app starts with "Pick" tab.  
 ![img1](doc/img1.png)  
 
-2. Push Colored Box and select the color
+2. Push Colored Box and select the color.  
 ![img2](doc/img2.png)  
 
-3. Goto "Color" tab
+3. Goto "Color" tab and check the theme color.  
 ![img3](doc/img3.png)  
 
-4. Goto "Component" tab
+4. Goto "Component" tab and check how widgets look.  
 ![img4](doc/img4.png)  
 ![img5](doc/img5.png)  
+
+5. Goto "Code" tab and copy the code.  
+![img6](doc/img6.png)  

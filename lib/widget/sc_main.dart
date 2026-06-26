@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_theme_color_check/widget/tab_color.dart';
 import 'package:flutter_theme_color_check/widget/tab_component.dart';
 import 'package:flutter_theme_color_check/widget/tab_pick.dart';
+import 'package:flutter_theme_color_check/widget/tab_code.dart';
 
 class ScMain extends StatefulWidget {
   const ScMain({super.key});
@@ -16,7 +17,7 @@ class ScMainState extends State<ScMain> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -41,13 +42,14 @@ class ScMainState extends State<ScMain> with TickerProviderStateMixin {
             Tab(text: 'pick', icon: Icon(Icons.cloud_outlined)),
             Tab(text: 'color', icon: Icon(Icons.beach_access_sharp)),
             Tab(text: 'component', icon: Icon(Icons.brightness_5_sharp)),
+            Tab(text: 'code', icon: Icon(Icons.favorite_border_sharp)),
           ],
         ),
       ),
 
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[TabPick(), TabColor(), TabComponent()],
+        children: <Widget>[TabPick(), TabColor(), TabComponent(), TabCode()],
       ),
 
       bottomNavigationBar: (_tabController.index == 2)
