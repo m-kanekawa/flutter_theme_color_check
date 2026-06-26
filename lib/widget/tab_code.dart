@@ -10,7 +10,6 @@ class TabCode extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final col = ref.watch(colorProvider);
-    final colN = ref.read(colorProvider.notifier);
 
     final String code =
         '''
