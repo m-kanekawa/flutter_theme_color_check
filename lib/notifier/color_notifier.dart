@@ -42,12 +42,7 @@ class ColorNotifier with ChangeNotifier {
         error: get_color('COLOR_ERROR'),
       );
 
-  ThemeData get themeL => ThemeData(
-    useMaterial3: true,
-    colorScheme: schemeL,
-    // appBarTheme       : appBarThemeL,
-    // textButtonTheme   : textButtonThemeL,
-  );
+  ThemeData get themeL => ThemeData(useMaterial3: true, colorScheme: schemeL);
 
   ColorScheme get schemeD =>
       ColorScheme.fromSeed(
@@ -64,12 +59,7 @@ class ColorNotifier with ChangeNotifier {
         error: get_color('COLOR_ERROR'),
       );
 
-  ThemeData get themeD => ThemeData(
-    useMaterial3: true,
-    colorScheme: schemeD,
-    // appBarTheme       : appBarThemeD,
-    // textButtonTheme   : textButtonThemeD,
-  );
+  ThemeData get themeD => ThemeData(useMaterial3: true, colorScheme: schemeD);
 
   Future<void> resetAllSetting() async {
     await _settting.resetAllSetting();
