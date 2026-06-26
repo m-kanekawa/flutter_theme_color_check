@@ -96,7 +96,7 @@ final colorSchemeD = ColorScheme.fromSeed(
                     Clipboard.setData(ClipboardData(text: code));
                     const snackBar = SnackBar(
                       content: Text('Text copied to clipboard.'),
-                      duration: Duration(seconds: 10),
+                      // duration: Duration(seconds: 10),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },

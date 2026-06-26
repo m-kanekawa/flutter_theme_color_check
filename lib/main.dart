@@ -15,7 +15,6 @@ class MainApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeModeProvider);
-    // ignore: unused_local_variable
     final col = ref.watch(colorProvider);
     final colN = ref.read(colorProvider.notifier);
 
@@ -29,8 +28,8 @@ class MainApp extends HookConsumerWidget {
 
     return MaterialApp(
       home: ScMain(),
-      theme: colN.themeL,
-      darkTheme: colN.themeD,
+      theme: col.themeL,
+      darkTheme: col.themeD,
       themeMode: (theme == Brightness.light) ? ThemeMode.light : ThemeMode.dark,
       debugShowCheckedModeBanner: false,
     );

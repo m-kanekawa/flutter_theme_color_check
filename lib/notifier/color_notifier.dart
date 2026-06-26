@@ -81,7 +81,6 @@ class ColorNotifier with ChangeNotifier {
       String key_l = key_d.replaceAll('_D', '_L');
       String val_l = get_value(key_l);
       set_value(key_d, val_l);
-      debugPrint('$key_d = $val_l');
     }
     notifyListeners();
   }
@@ -127,6 +126,7 @@ class ColorNotifier with ChangeNotifier {
   Future<void> readAllSetting() async {
     await _settting.readAllSetting();
     _init_list_same();
+    notifyListeners();
   }
 
   // --- private ---
