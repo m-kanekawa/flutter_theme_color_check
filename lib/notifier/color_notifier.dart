@@ -58,36 +58,34 @@ class ColorNotifier with ChangeNotifier {
 
   ColorScheme get schemeL =>
       ColorScheme.fromSeed(
-        seedColor: get_color('COLOR_SEED_L'),
-        brightness: Brightness.light,
+        seedColor        : get_color('COLOR_SEED_L'),
+        brightness       : Brightness.light,
       ).copyWith(
-        primary: get_color('COLOR_PRIMARY_L'),
-        secondary: get_color('COLOR_SECONDARY_L'),
-        tertiary: get_color('COLOR_TERTIARY_L'),
-        primaryContainer: get_color('COLOR_PRIMARY_CONTAINER_L'),
-        surface: get_color('COLOR_SURFACE_L'),
-        surfaceBright: get_color('COLOR_SURFACE_BRIGHT_L'),
-        onSurface: get_color('COLOR_ONSURFACE_L'),
-        error: get_color('COLOR_ERROR_L'),
+        primary          : get_color('COLOR_PRIMARY_L'),
+        secondary        : get_color('COLOR_SECONDARY_L'),
+        tertiary         : get_color('COLOR_TERTIARY_L'),
+        primaryContainer : get_color('COLOR_PRIMARY_CONTAINER_L'),
+        surface          : get_color('COLOR_SURFACE_L'),
+        surfaceBright    : get_color('COLOR_SURFACE_BRIGHT_L'),
+        onSurface        : get_color('COLOR_ONSURFACE_L'),
+        error            : get_color('COLOR_ERROR_L'),
       );
-
   ThemeData get themeL => ThemeData(useMaterial3: true, colorScheme: schemeL);
 
   ColorScheme get schemeD =>
       ColorScheme.fromSeed(
-        seedColor: get_color('COLOR_SEED_D'),
-        brightness: Brightness.light,
+        seedColor        : get_color('COLOR_SEED_D'),
+        brightness       : Brightness.light,
       ).copyWith(
-        primary: get_color('COLOR_PRIMARY_D'),
-        secondary: get_color('COLOR_SECONDARY_D'),
-        tertiary: get_color('COLOR_TERTIARY_D'),
-        primaryContainer: get_color('COLOR_PRIMARY_CONTAINER_D'),
-        surface: get_color('COLOR_SURFACE_D'),
-        surfaceBright: get_color('COLOR_SURFACE_BRIGHT_D'),
-        onSurface: get_color('COLOR_ONSURFACE_D'),
-        error: get_color('COLOR_ERROR_D'),
+        primary          : get_color('COLOR_PRIMARY_D'),
+        secondary        : get_color('COLOR_SECONDARY_D'),
+        tertiary         : get_color('COLOR_TERTIARY_D'),
+        primaryContainer : get_color('COLOR_PRIMARY_CONTAINER_D'),
+        surface          : get_color('COLOR_SURFACE_D'),
+        surfaceBright    : get_color('COLOR_SURFACE_BRIGHT_D'),
+        onSurface        : get_color('COLOR_ONSURFACE_D'),
+        error            : get_color('COLOR_ERROR_D'),
       );
-
   ThemeData get themeD => ThemeData(useMaterial3: true, colorScheme: schemeD);
 
   Future<void> resetAllSetting() async {
