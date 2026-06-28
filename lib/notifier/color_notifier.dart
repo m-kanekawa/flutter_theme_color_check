@@ -58,11 +58,15 @@ class ColorNotifier with ChangeNotifier {
   }
 
   ColorScheme scheme(Brightness brightness){
+
     String x = (brightness == Brightness.light) ? 'L' : 'D';
     return ColorScheme.fromSeed(
         seedColor               : get_color('seed_$x'),
         brightness              : brightness,
       ).copyWith(
+        // ----------------------------------------------------------
+        // I don't know how to write code below using ColorSchemeList 
+        // ----------------------------------------------------------
         primary                 : get_color_or_null('primary_$x'),
         onPrimary               : get_color_or_null('onPrimary_$x'),
         primaryContainer        : get_color_or_null('primaryContainer_$x'),
