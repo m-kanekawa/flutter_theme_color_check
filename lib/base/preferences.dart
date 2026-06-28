@@ -17,14 +17,17 @@ mixin MkPreference {
     for (var key in list.keys) {
       if (list[key] is bool) {
         list[key] = p.getBool(key) ?? list[key];
+        MkPrint('readSettingB($key) = ${list[key]}');
       } else if (list[key] is int) {
         list[key] = p.getInt(key) ?? list[key];
+        MkPrint('readSettingI($key) = ${list[key]}');
       } else if (list[key] is double) {
         list[key] = p.getDouble(key) ?? list[key];
+        MkPrint('readSettingD($key) = ${list[key]}');
       } else if (list[key] is String) {
         list[key] = p.getString(key) ?? list[key];
+        MkPrint('readSettingS($key) = ${list[key]}');
       }
-      MkPrint('readSetting($key) = ${list[key]}');
       await saveSetting(key, p: p);
     }
   }

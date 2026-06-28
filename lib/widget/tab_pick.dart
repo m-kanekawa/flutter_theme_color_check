@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:flutter_theme_color_check/base/color_scheme.dart';
 import 'package:flutter_theme_color_check/notifier/color_notifier.dart';
 
 class TabPick extends HookConsumerWidget {
@@ -8,58 +9,54 @@ class TabPick extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final col = ref.watch(colorProvider);
-
     return Material(
       child: Container(
         padding: EdgeInsets.all(8),
-        child: Column(
-          spacing: 8,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Container(
-                  width: 40,
-                  alignment: Alignment.center,
-                  child: Text('Use'),
-                ),
-                Expanded(
-                  child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: 8,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 8,
+                children: [
+                  Container(
+                    width: 40,
                     alignment: Alignment.center,
-                    child: Text('Light Mode'),
+                    child: Text('Use'),
                   ),
-                ),
-                Container(
-                  width: 40,
-                  alignment: Alignment.center,
-                  child: Text('Use'),
-                ),
-                Expanded(
-                  child: Container(
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text('Light Mode'),
+                    ),
+                  ),
+                  Container(
+                    width: 40,
                     alignment: Alignment.center,
-                    child: Text('Dark Mode'),
+                    child: Text('Use'),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Check(list: col.list_use, end: 'L'),
-                Expanded(
-                  child: ColorLine(list: col.list_use, end: 'L'),
-                ),
-                Check(list: col.list_use, end: 'D'),
-                Expanded(
-                  child: ColorLine(list: col.list_use, end: 'D'),
-                ),
-              ],
-            ),
-          ],
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text('Dark Mode'),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 8,
+                children: [
+                  Check(brightness: Brightness.light),
+                  Expanded(child: ColorLine(brightness: Brightness.light)),
+                  Check(brightness: Brightness.dark),
+                  Expanded(child: ColorLine(brightness: Brightness.dark)),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -67,25 +64,25 @@ class TabPick extends HookConsumerWidget {
 }
 
 class Check extends HookConsumerWidget {
-  final Map<String, dynamic> list;
-  final String end;
-  const Check({super.key, required this.list, required this.end});
+  final Brightness brightness;
+  const Check({super.key, required this.brightness});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final col = ref.watch(colorProvider);
     final colN = ref.read(colorProvider.notifier);
-    List<Widget> w = [];
+    final String x = (brightness == Brightness.light) ? 'L' : 'D';
 
-    for (var key_u in list.keys) {
-      if (!key_u.endsWith(end)) continue;
+    List<Widget> w = [];
+    w.add(Checkbox(value: true, onChanged: null));
+    for (String key in ColorSchemeList) {
+      String key_u = 'U_${key}_$x';
       w.add(
         Checkbox(
-          value: list[key_u],
-          onChanged: (key_u.startsWith('U_COLOR_SEED_'))
-              ? null
-              : (val) {
-                  colN.set_use(key_u, val!);
-                },
+          value: col.list_use[key_u],
+          onChanged: (val) {
+            colN.set_use(key_u, val!);
+          },
         ),
       );
     }
@@ -97,39 +94,40 @@ class Check extends HookConsumerWidget {
 }
 
 class ColorLine extends HookConsumerWidget {
-  final Map<String, dynamic> list;
-  final String end;
-  const ColorLine({super.key, required this.list, required this.end});
+  final Brightness brightness;
+  const ColorLine({super.key, required this.brightness});
+
+  Widget getRow({required String key_c, required String name, required bool use, required Color color}) {
+    return Row(
+      spacing: 8,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(name),
+              if (use) Text(ColorTools.materialNameAndCode(color)),
+            ],
+          ),
+        ),
+        (use) ? ColorBox(key_c:key_c, name: name, color: color) : SizedBox(height: 40),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final col = ref.watch(colorProvider);
     final colN = ref.read(colorProvider.notifier);
-    List<Widget> w = [];
+    final String x = (brightness == Brightness.light) ? 'L' : 'D';
 
-    for (var key_u in list.keys) {
-      if (!key_u.endsWith(end)) continue;
-      String key = key_u.replaceAll('U_', '');
-      Color? color = colN.get_color(key);
-      w.add(
-        Row(
-          spacing: 8,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(key),
-                  if (list[key_u] == true)
-                    Text(ColorTools.materialNameAndCode(color)),
-                ],
-              ),
-            ),
-            (list[key_u] == true)
-                ? ColorBox(name: key, color: color)
-                : SizedBox(height: 40),
-          ],
-        ),
-      );
+    List<Widget> w = [];
+    w.add(getRow(key_c:'seed_$x', name: 'seed', use:true, color:colN.get_color('seed_$x')));
+
+    for (String key in ColorSchemeList) {
+      String key_c = '${key}_$x';
+      String key_u = 'U_${key}_$x';
+      w.add(getRow(key_c:key_c, name:key, use:col.list_use[key_u], color:colN.get_color(key_c)));
     }
     return Container(
       padding: EdgeInsets.all(8),
@@ -140,9 +138,10 @@ class ColorLine extends HookConsumerWidget {
 }
 
 class ColorBox extends HookConsumerWidget {
+  final String key_c;
   final String name;
   final Color color;
-  const ColorBox({super.key, required this.name, required this.color});
+  const ColorBox({super.key, required this.key_c, required this.name, required this.color});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -159,7 +158,7 @@ class ColorBox extends HookConsumerWidget {
         final Color newColor = await showColorPickerDialog(
           context,
           color,
-          title: const Text('ColorPicker with very long title'),
+          title: Text(name),
           width: 40,
           height: 40,
           spacing: 0,
@@ -219,7 +218,7 @@ class ColorBox extends HookConsumerWidget {
           ),
         );
 
-        colN.set_color(name, newColor);
+        colN.set_color(key_c, newColor);
       },
     );
   }

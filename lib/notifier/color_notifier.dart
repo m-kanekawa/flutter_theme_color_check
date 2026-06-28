@@ -20,19 +20,20 @@ final colorProvider = ChangeNotifierProvider<ColorNotifier>((ref) {
 class ColorNotifier with ChangeNotifier {
   // --- ref ---
   final ColorStore _color = ColorStore();
-  final UseStore _use = UseStore();
+  final UseStore   _use   = UseStore();
 
   // --- public ---
   Map<String, dynamic> get list_color => _color.list;
-  Map<String, dynamic> get list_use => _use.list;
+  Map<String, dynamic> get list_use   => _use.list;
 
   String get_color_string(String key) {
-    return _color.get_value(key);
+    String val = _color.get_value(key);
+    return val.isEmpty ? '0xFF000000' : val;
   }
 
   Color get_color(String key) {
     String val = get_color_string(key);
-    return Color(int.parse(val.isEmpty ? '0xFF000000' : val));
+    return Color(int.parse(val));
   }
 
   Color? get_color_or_null(String key) {
@@ -56,36 +57,64 @@ class ColorNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  ColorScheme get schemeL =>
-      ColorScheme.fromSeed(
-        seedColor        : get_color('COLOR_SEED_L'),
-        brightness       : Brightness.light,
+  ColorScheme scheme(Brightness brightness){
+    String x = (brightness == Brightness.light) ? 'L' : 'D';
+    return ColorScheme.fromSeed(
+        seedColor               : get_color('seed_$x'),
+        brightness              : brightness,
       ).copyWith(
-        primary          : get_color('COLOR_PRIMARY_L'),
-        secondary        : get_color('COLOR_SECONDARY_L'),
-        tertiary         : get_color('COLOR_TERTIARY_L'),
-        primaryContainer : get_color('COLOR_PRIMARY_CONTAINER_L'),
-        surface          : get_color('COLOR_SURFACE_L'),
-        surfaceBright    : get_color('COLOR_SURFACE_BRIGHT_L'),
-        onSurface        : get_color('COLOR_ONSURFACE_L'),
-        error            : get_color('COLOR_ERROR_L'),
+        primary                 : get_color_or_null('primary_$x'),
+        onPrimary               : get_color_or_null('onPrimary_$x'),
+        primaryContainer        : get_color_or_null('primaryContainer_$x'),
+        onPrimaryContainer      : get_color_or_null('onPrimaryContainer_$x'),
+        primaryFixed            : get_color_or_null('primaryFixed_$x'),
+        primaryFixedDim         : get_color_or_null('primaryFixedDim_$x'),
+        onPrimaryFixed          : get_color_or_null('onPrimaryFixed_$x'),
+        onPrimaryFixedVariant   : get_color_or_null('onPrimaryFixedVariant_$x'),
+        secondary               : get_color_or_null('secondary_$x'),
+        onSecondary             : get_color_or_null('onSecondary_$x'),
+        onSecondaryContainer    : get_color_or_null('onSecondaryContainer_$x'),
+        secondaryFixed          : get_color_or_null('secondaryFixed_$x'),
+        secondaryFixedDim       : get_color_or_null('secondaryFixedDim_$x'),
+        onSecondaryFixed        : get_color_or_null('onSecondaryFixed_$x'),
+        onSecondaryFixedVariant : get_color_or_null('onSecondaryFixedVariant_$x'),
+        tertiary                : get_color_or_null('tertiary_$x'),
+        onTertiary              : get_color_or_null('onTertiary_$x'),
+        tertiaryContainer       : get_color_or_null('tertiaryContainer_$x'),
+        onTertiaryContainer     : get_color_or_null('onTertiaryContainer_$x'),
+        tertiaryFixed           : get_color_or_null('tertiaryFixed_$x'),
+        tertiaryFixedDim        : get_color_or_null('tertiaryFixedDim_$x'),
+        onTertiaryFixed         : get_color_or_null('onTertiaryFixed_$x'),
+        onTertiaryFixedVariant  : get_color_or_null('onTertiaryFixedVariant_$x'),
+        error                   : get_color_or_null('error_$x'),
+        onError                 : get_color_or_null('onError_$x'),
+        errorContainer          : get_color_or_null('errorContainer_$x'),
+        onErrorContainer        : get_color_or_null('onErrorContainer_$x'),
+        outline                 : get_color_or_null('outline_$x'),
+        outlineVariant          : get_color_or_null('outlineVariant_$x'),
+        surface                 : get_color_or_null('surface_$x'),
+        onSurface               : get_color_or_null('onSurface_$x'),
+        surfaceDim              : get_color_or_null('surfaceDim_$x'),
+        surfaceBright           : get_color_or_null('surfaceBright_$x'),
+        surfaceContainerLowest  : get_color_or_null('surfaceContainerLowest_$x'),
+        surfaceContainerLow     : get_color_or_null('surfaceContainerLow_$x'),
+        surfaceContainer        : get_color_or_null('surfaceContainer_$x'),
+        surfaceContainerHigh    : get_color_or_null('surfaceContainerHigh_$x'),
+        surfaceContainerHighest : get_color_or_null('surfaceContainerHighest_$x'),
+        onSurfaceVariant        : get_color_or_null('onSurfaceVariant_$x'),
+        inverseSurface          : get_color_or_null('inverseSurface_$x'),
+        onInverseSurface        : get_color_or_null('onInverseSurface_$x'),
+        inversePrimary          : get_color_or_null('inversePrimary_$x'),
+        shadow                  : get_color_or_null('shadow_$x'),
+        scrim                   : get_color_or_null('scrim_$x'),
+        surfaceTint             : get_color_or_null('surfaceTint_$x'),
       );
-  ThemeData get themeL => ThemeData(useMaterial3: true, colorScheme: schemeL);
+  }
 
-  ColorScheme get schemeD =>
-      ColorScheme.fromSeed(
-        seedColor        : get_color('COLOR_SEED_D'),
-        brightness       : Brightness.light,
-      ).copyWith(
-        primary          : get_color('COLOR_PRIMARY_D'),
-        secondary        : get_color('COLOR_SECONDARY_D'),
-        tertiary         : get_color('COLOR_TERTIARY_D'),
-        primaryContainer : get_color('COLOR_PRIMARY_CONTAINER_D'),
-        surface          : get_color('COLOR_SURFACE_D'),
-        surfaceBright    : get_color('COLOR_SURFACE_BRIGHT_D'),
-        onSurface        : get_color('COLOR_ONSURFACE_D'),
-        error            : get_color('COLOR_ERROR_D'),
-      );
+  ColorScheme get schemeL => scheme(Brightness.light);
+  ColorScheme get schemeD => scheme(Brightness.dark);
+
+  ThemeData get themeL => ThemeData(useMaterial3: true, colorScheme: schemeL);
   ThemeData get themeD => ThemeData(useMaterial3: true, colorScheme: schemeD);
 
   Future<void> resetAllSetting() async {

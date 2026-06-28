@@ -1,35 +1,11 @@
 import 'package:flutter_theme_color_check/base/preferences.dart';
+import 'package:flutter_theme_color_check/base/color_scheme.dart';
 
-// !!! Warning !!!
-// set
-//   "editor.formatOnSave": false,"
-// in .vscode/settings.json
-// when save this file
+// String value of HEX for Color for each of ColorSchemeList
+// Empty value allowed.
 //
-// I really hate dart formatter remove spaces between.
-//
-
-final Map<String, dynamic> jsonSetting = {
-  'COLOR_SEED_L'              : '0xFFA8A8A8',
-  'COLOR_PRIMARY_L'           : '0xFF8BC34A',
-  'COLOR_SECONDARY_L'         : '0xFF4BC3BF',
-  'COLOR_TERTIARY_L'          : '0xFFC34B4F',
-  'COLOR_SURFACE_L'           : '0xFFFFFFFF',
-  'COLOR_SURFACE_BRIGHT_L'    : '0xFFF8F8F8',
-  'COLOR_ONSURFACE_L'         : '0xFF6E6E6E',
-  'COLOR_PRIMARY_CONTAINER_L' : '0xFFBCDD98',
-  'COLOR_ERROR_L'             : '0xFFEF5350',
-
-  'COLOR_SEED_D'              : '0xFFA8A8A8',
-  'COLOR_PRIMARY_D'           : '0xFF8BC34A',
-  'COLOR_SECONDARY_D'         : '0xFF4BC3BF',
-  'COLOR_TERTIARY_D'          : '0xFFC34B4F',
-  'COLOR_SURFACE_D'           : '0xFF1C1C1C',
-  'COLOR_SURFACE_BRIGHT_D'    : '0xFF282828',
-  'COLOR_ONSURFACE_D'         : '0xFFF8F8F8',
-  'COLOR_PRIMARY_CONTAINER_D' : '0xFF577E2A',
-  'COLOR_ERROR_D'             : '0xFFEF5350',
-};
+// For example, "primary" has 2 values,
+// {primary_L : '0xFFA8A8A8', primary_D : ''}
 
 class ColorStore with MkPreference {
   // --- singleton ---
@@ -49,6 +25,12 @@ class ColorStore with MkPreference {
   // --- private ---
   @override
   void set_list() {
-    super.list = jsonSetting;
+    Map<String, dynamic> tmp = {'seed_L': '0xFFA8A8A8', 'seed_D': '0xFFA8A8A8'};
+    for (int i = 0; i < ColorSchemeList.length; i++) {
+      var keyL = '${ColorSchemeList[i]}_L';
+      var keyD = '${ColorSchemeList[i]}_D';
+      tmp.addAll({keyL: '', keyD: ''});
+    }
+    super.list = tmp;
   }
 }

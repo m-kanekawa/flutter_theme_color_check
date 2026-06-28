@@ -28,6 +28,5 @@ recommended to run on the desktop.
 
 ## Things I'd like to add
 * Add some more components
-* Add more Color elements in ColorScheme
   
 **Pull requests are very welcome ^^**  
