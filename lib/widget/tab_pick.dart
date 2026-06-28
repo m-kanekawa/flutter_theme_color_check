@@ -75,7 +75,7 @@ class Check extends HookConsumerWidget {
 
     List<Widget> w = [];
     w.add(Checkbox(value: true, onChanged: null));
-    for (String key in ColorSchemeList) {
+    for (String key in Const.ColorSchemeList) {
       String key_u = 'U_${key}_$x';
       w.add(
         Checkbox(
@@ -97,7 +97,12 @@ class ColorLine extends HookConsumerWidget {
   final Brightness brightness;
   const ColorLine({super.key, required this.brightness});
 
-  Widget getRow({required String key_c, required String name, required bool use, required Color color}) {
+  Widget getRow({
+    required String key_c,
+    required String name,
+    required bool use,
+    required Color color,
+  }) {
     return Row(
       spacing: 8,
       children: [
@@ -110,7 +115,9 @@ class ColorLine extends HookConsumerWidget {
             ],
           ),
         ),
-        (use) ? ColorBox(key_c:key_c, name: name, color: color) : SizedBox(height: 40),
+        (use)
+            ? ColorBox(key_c: key_c, name: name, color: color)
+            : SizedBox(height: 40),
       ],
     );
   }
@@ -122,12 +129,26 @@ class ColorLine extends HookConsumerWidget {
     final String x = (brightness == Brightness.light) ? 'L' : 'D';
 
     List<Widget> w = [];
-    w.add(getRow(key_c:'seed_$x', name: 'seed', use:true, color:colN.get_color('seed_$x')));
+    w.add(
+      getRow(
+        key_c: 'seed_$x',
+        name: 'seed',
+        use: true,
+        color: colN.get_color('seed_$x'),
+      ),
+    );
 
-    for (String key in ColorSchemeList) {
+    for (String key in Const.ColorSchemeList) {
       String key_c = '${key}_$x';
       String key_u = 'U_${key}_$x';
-      w.add(getRow(key_c:key_c, name:key, use:col.list_use[key_u], color:colN.get_color(key_c)));
+      w.add(
+        getRow(
+          key_c: key_c,
+          name: key,
+          use: col.list_use[key_u],
+          color: colN.get_color(key_c),
+        ),
+      );
     }
     return Container(
       padding: EdgeInsets.all(8),
@@ -141,7 +162,12 @@ class ColorBox extends HookConsumerWidget {
   final String key_c;
   final String name;
   final Color color;
-  const ColorBox({super.key, required this.key_c, required this.name, required this.color});
+  const ColorBox({
+    super.key,
+    required this.key_c,
+    required this.name,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

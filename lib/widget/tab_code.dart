@@ -5,7 +5,13 @@ import 'package:flutter_theme_color_check/base/color_scheme.dart';
 import 'package:flutter_theme_color_check/notifier/color_notifier.dart';
 
 class TabCode extends HookConsumerWidget {
-  const TabCode({super.key});
+  TabCode({super.key});
+
+  final int max_key_len = Const.ColorSchemeMaxLen;
+  String get_key_with_spaces(String key) {
+    final int key_len = key.length;
+    return key + ' ' * (max_key_len - key_len);
+  }
 
   String get_code(Brightness brightness, var col) {
     final String x = (brightness == Brightness.light) ? 'L' : 'D';
@@ -16,22 +22,24 @@ class TabCode extends HookConsumerWidget {
         '''
   // -- theme($xx) --
   static final ThemeData theme$x = ThemeData(
-    useMaterial3      : true,
-    colorScheme       : colorScheme$x,
+    useMaterial3            : true,
+    colorScheme             : colorScheme$x,
   );
   static final ColorScheme colorScheme$x = ColorScheme.fromSeed(
-    seedColor         : $color_seed,
-    brightness        : Brightness.light,
+    seedColor               : $color_seed,
+    brightness              : $brightness,
   )
   .copyWith(
 ''';
 
-    for (String key in ColorSchemeList) {
+    for (String key in Const.ColorSchemeList) {
       String key_c = '${key}_$x';
       String key_u = 'U_${key}_$x';
+      String key_space = get_key_with_spaces(key);
+
       var color = col.get_color_code(key_c);
       if (col.list_use[key_u]) {
-        code += '    $key : $color,\n';
+        code += '    $key_space : $color,\n';
       }
     }
     code += '  );\n';

@@ -26,9 +26,9 @@ class ColorStore with MkPreference {
   @override
   void set_list() {
     Map<String, dynamic> tmp = {'seed_L': '0xFFA8A8A8', 'seed_D': '0xFFA8A8A8'};
-    for (int i = 0; i < ColorSchemeList.length; i++) {
-      var keyL = '${ColorSchemeList[i]}_L';
-      var keyD = '${ColorSchemeList[i]}_D';
+    for (int i = 0; i < Const.ColorSchemeList.length; i++) {
+      var keyL = '${Const.ColorSchemeList[i]}_L';
+      var keyD = '${Const.ColorSchemeList[i]}_D';
       tmp.addAll({keyL: '', keyD: ''});
     }
     super.list = tmp;

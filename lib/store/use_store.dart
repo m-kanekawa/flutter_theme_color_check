@@ -29,9 +29,9 @@ class UseStore with MkPreference {
     Map<String, dynamic> tmp = {'U_seed_L': true, 'U_seed_D': true};
     // U_seed_L, U_seed_D are allways true!
 
-    for (int i = 0; i < ColorSchemeList.length; i++) {
-      var keyL = 'U_${ColorSchemeList[i]}_L';
-      var keyD = 'U_${ColorSchemeList[i]}_D';
+    for (int i = 0; i < Const.ColorSchemeList.length; i++) {
+      var keyL = 'U_${Const.ColorSchemeList[i]}_L';
+      var keyD = 'U_${Const.ColorSchemeList[i]}_D';
       tmp.addAll({keyL: false, keyD: false});
     }
     super.list = tmp;
